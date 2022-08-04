@@ -11,7 +11,8 @@ def load_models():
     model_name_dict = {
 		  #'nllb-distilled-600M': 'facebook/nllb-200-distilled-600M',
                   #'nllb-1.3B': 'facebook/nllb-200-1.3B',
-                  'nllb-distilled-1.3B': 'facebook/nllb-200-distilled-1.3B',
+                  #'nllb-distilled-1.3B': 'facebook/nllb-200-distilled-1.3B',
+                  'opus-mt-mul-en': 'Helsinki-NLP/opus-mt-mul-en'
                   #'nllb-3.3B': 'facebook/nllb-200-3.3B',
                   }
 
@@ -29,7 +30,7 @@ def load_models():
 
 def translation(source, target, text):
     if len(model_dict) == 2:
-        model_name = 'nllb-distilled-1.3B'
+        model_name = 'opus-mt-mul-en'
 
     start_time = time.time()
     source = flores_codes[source]
@@ -39,14 +40,13 @@ def translation(source, target, text):
     tokenizer = model_dict[model_name + '_tokenizer']
 
     translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang=source, tgt_lang=target)
-    output = translator(text, max_length=2000)
+    output = translator(text, max_length=400)
 
     end_time = time.time()
 
     full_output = output
     output = output[0]['translation_text']
-    result = {'time': end_time - start_time,
-              'text': text,
+    result = {'inference_time': end_time - start_time,
               'source': source,
               'target': target,
               'result': output,
@@ -67,6 +67,10 @@ async def root():
 @app.get("/translate")
 async def translate(source: str = "Portuguese", target: str = "English", text: str = 'loirinha rabuda'):
  
-    return translation(source,target,text)
+    return {
+        "source":   source,
+        "target":   target,
+        "text": text,
+        "translation": translation(source,target,text)}
 
  
