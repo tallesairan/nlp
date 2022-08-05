@@ -41,7 +41,7 @@ def GenerateText(text,tokens):
    
 
     model = model_dict[model_name + '_model']
-    tokenizer = model_dict[model_name + '_tokenizer'].to("cuda")
+    tokenizer = model_dict[model_name + '_tokenizer'].to("cuda", torch_dtype=torch.float16)
         
     generator = pipeline('text-generation',  model=model, tokenizer=tokenizer)
         
