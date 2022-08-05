@@ -1,20 +1,18 @@
-
-from asyncio import threads
 import os
 import torch
+ 
 import time
-from transformers import AutoTokenizer, AutoModelForCausalLM, GPTJForCausalLM, pipeline
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 from flores200_codes import flores_codes
 from fastapi import FastAPI
 
- 
 def load_models():
     # build model and tokenizer
     model_name_dict = {
 		  #'nllb-distilled-600M': 'facebook/nllb-200-distilled-600M',
                   #'nllb-1.3B': 'facebook/nllb-200-1.3B',
                   #'nllb-distilled-1.3B': 'facebook/nllb-200-distilled-1.3B',
-                  'gpt-j': 'EleutherAI/gpt-j-6B'
+                  'opus-mt-en-zh': 'Helsinki-NLP/opus-mt-en-zh'
                   #'nllb-3.3B': 'facebook/nllb-200-3.3B',
                   }
 
@@ -22,8 +20,7 @@ def load_models():
 
     for call_name, real_name in model_name_dict.items():
         print('\tLoading model: %s' % call_name)
-        model = GPTJForCausalLM.from_pretrained(real_name, torch_dtype=torch.float16, low_cpu_mem_usage=True).to("cuda")
-        # model = AutoModelForCausalLM.from_pretrained(real_name,  torch_dtype=torch.float16, low_cpu_mem_usage=True)
+        model = AutoModelForSeq2SeqLM.from_pretrained(real_name)
         tokenizer = AutoTokenizer.from_pretrained(real_name)
         model_dict[call_name+'_model'] = model
         model_dict[call_name+'_tokenizer'] = tokenizer
@@ -31,33 +28,30 @@ def load_models():
     return model_dict
 
 
-def GenerateText(text,tokens):
-    
- 
+def translation(source, target, text):
     if len(model_dict) == 2:
-        model_name = 'gpt-j'
+        model_name = 'opus-mt-en-zh'
 
     start_time = time.time()
-   
+    source = flores_codes[source]
+    target = flores_codes[target]
 
     model = model_dict[model_name + '_model']
     tokenizer = model_dict[model_name + '_tokenizer']
-        
-    generator = pipeline('text-generation',  model=model, tokenizer=tokenizer)
-        
-    output = generator(text, do_sample=True, temperature=0.9, max_new_tokens=tokens)
+
+    translator = pipeline('translation', model=model, tokenizer=tokenizer, src_lang=source, tgt_lang=target)
+    output = translator(text, max_length=400)
 
     end_time = time.time()
 
     full_output = output
-    output = output[0]['generated_text']
+    output = output[0]['translation_text']
     result = {'inference_time': end_time - start_time,
+              'source': source,
+              'target': target,
               'result': output,
-              'full_output': full_output
-              }
+              'full_output': full_output}
     return result
-
-
 
 global model_dict
 model_dict = load_models()
@@ -68,13 +62,15 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "run /generate?text=&tokens=2048"}
+    return {"message": "run /translate?source=&target=&text="}
 
-@app.get("/generate")
-async def generate(tokens: int = 250, text: str = 'Control Max'):
+@app.get("/translate")
+async def translate(source: str = "Portuguese", target: str = "English", text: str = 'loirinha rabuda'):
  
     return {
+        "source":   source,
+        "target":   target,
         "text": text,
-        "GenerateText": GenerateText(text,tokens)}
+        "translation": translation(source,target,text)}
 
  
