@@ -22,7 +22,8 @@ def load_models():
 
     for call_name, real_name in model_name_dict.items():
         print('\tLoading model: %s' % call_name)
-        model = AutoModelForCausalLM.from_pretrained(real_name,  torch_dtype=torch.float16, low_cpu_mem_usage=True)
+        model = GPTJForCausalLM.from_pretrained(real_name, torch_dtype=torch.float16, low_cpu_mem_usage=True).to("cuda",  torch_dtype=torch.float16)
+        # model = AutoModelForCausalLM.from_pretrained(real_name,  torch_dtype=torch.float16, low_cpu_mem_usage=True)
         tokenizer = AutoTokenizer.from_pretrained(real_name)
         model_dict[call_name+'_model'] = model
         model_dict[call_name+'_tokenizer'] = tokenizer
@@ -40,7 +41,7 @@ def GenerateText(text,tokens):
    
 
     model = model_dict[model_name + '_model']
-    tokenizer = model_dict[model_name + '_tokenizer']
+    tokenizer = model_dict[model_name + '_tokenizer'].to("cuda")
         
     generator = pipeline('text-generation',  model=model, tokenizer=tokenizer)
         
