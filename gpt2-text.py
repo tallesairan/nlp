@@ -3,7 +3,7 @@ from asyncio import threads
 import os
 import torch
 import time
-from transformers import AutoTokenizer, AutoModelForCausalLM,GPTJForCausalLM, pipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, GPTJForCausalLM, pipeline
 from flores200_codes import flores_codes
 from fastapi import FastAPI
 
@@ -22,7 +22,7 @@ def load_models():
 
     for call_name, real_name in model_name_dict.items():
         print('\tLoading model: %s' % call_name)
-        model = GPTJForCausalLM.from_pretrained(real_name, revision="float16", torch_dtype=torch.float16)
+        model = GPTJForCausalLM.from_pretrained(real_name, revision="float16")
         tokenizer = AutoTokenizer.from_pretrained(real_name)
         model_dict[call_name+'_model'] = model
         model_dict[call_name+'_tokenizer'] = tokenizer
@@ -44,7 +44,7 @@ def GenerateText(text,tokens):
         
     generator = pipeline('text-generation',  model=model, tokenizer=tokenizer)
         
-    output = generator(text,num_return_sequences=2,max_new_tokens=tokens)
+    output = generator(text, max_new_tokens=tokens)
 
     end_time = time.time()
 
