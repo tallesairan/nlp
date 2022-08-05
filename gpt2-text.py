@@ -71,7 +71,7 @@ async def root():
     return {"message": "run /generate?text=&tokens=2048"}
 
 @app.get("/generate")
-async def generate(tokens: int = 512, text: str = 'Control Max'):
+async def generate(tokens: int = 250, text: str = 'Control Max'):
  
     return {
         "text": text,

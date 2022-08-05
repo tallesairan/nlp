@@ -65,7 +65,7 @@ async def root():
     return {"message": "run /translate?source=&target=&text="}
 
 @app.get("/translate")
-async def translate(source: str = "Portuguese", target: str = "English", text: str = 'loirinha rabuda'):
+async def translate(source: str = "Portuguese", target: str = "English", text: str = 'Good night'):
  
     return {
         "source":   source,
