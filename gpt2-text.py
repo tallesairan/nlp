@@ -31,22 +31,9 @@ def load_models():
     return model_dict
 
 
-def GenerateText(text):
+def GenerateText(text,tokens):
     
-    if not torch.backends.mps.is_available():
-        if not torch.backends.mps.is_built():
-            print("MPS not available because the current PyTorch install was not "
-            "built with MPS enabled.")
-        else:
-            print("MPS not available because the current MacOS version is not 12.3+ "
-                "and/or you do not have an MPS-enabled device on this machine.")
-        
-    else:
-            print("Setting MPS as default device")
-            mps_device = torch.device("mps")
-        
-        
-        
+ 
     if len(model_dict) == 2:
         model_name = 'gpt-j'
 
@@ -55,29 +42,10 @@ def GenerateText(text):
 
     model = model_dict[model_name + '_model']
     tokenizer = model_dict[model_name + '_tokenizer']
-    
-    
-    if not torch.backends.mps.is_available():
-        if not torch.backends.mps.is_built():
-            print("MPS not available because the current PyTorch install was not "
-                "built with MPS enabled.")
-        else:
-            print("MPS not available because the current MacOS version is not 12.3+ "
-                "and/or you do not have an MPS-enabled device on this machine.")
-            
-
-
-        mps_device = torch.device("mps")
-        generator = pipeline('text-generation',  model=model, device=mps_device, tokenizer=tokenizer)
-
-
-    else:
-        print("Using default device")
-        generator = pipeline('text-generation',  model=model, tokenizer=tokenizer)
-
         
-            
-    output = generator(text,max_new_tokens=1024)
+    generator = pipeline('text-generation',  model=model, tokenizer=tokenizer)
+        
+    output = generator(text,max_new_tokens=tokens)
 
     end_time = time.time()
 
@@ -88,8 +56,8 @@ def GenerateText(text):
               'full_output': full_output
               }
     return result
-    """
-    """
+
+
 
 global model_dict
 model_dict = load_models()
@@ -100,13 +68,13 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "run /generate?source=&target=&text="}
+    return {"message": "run /generate?text=&tokens=2048"}
 
 @app.get("/generate")
-async def generate(text: str = 'loirinha rabuda'):
+async def generate(tokens: int = 512, text: str = 'Control Max'):
  
     return {
         "text": text,
-        "GenerateText": GenerateText(text)}
+        "GenerateText": GenerateText(text,tokens)}
 
  
