@@ -23,8 +23,8 @@ def load_models():
     for call_name, real_name in model_name_dict.items():
         print('\tLoading model: %s' % call_name)
         
-        model = GPTJForCausalLM.from_pretrained(real_name, torch_dtype=torch.float16, low_cpu_mem_usage=True).to("cuda")
-        # model = AutoModelForCausalLM.from_pretrained(real_name)
+        # model = GPTJForCausalLM.from_pretrained(real_name, torch_dtype=torch.float16, low_cpu_mem_usage=True).to("cuda")
+        model = AutoModelForCausalLM.from_pretrained(real_name).to("cuda"))
         tokenizer = AutoTokenizer.from_pretrained(real_name)
         model_dict[call_name+'_model'] = model
         model_dict[call_name+'_tokenizer'] = tokenizer
