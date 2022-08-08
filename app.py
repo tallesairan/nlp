@@ -9,7 +9,7 @@ from fastapi import FastAPI
 def load_models():
     # build model and tokenizer
     model_name_dict = {
-		          'nllb-distilled-600m': 'facebook/nllb-200-distilled-600M',
+		          'nllb-distilled': 'facebook/nllb-200-distilled-600M',
                   #'nllb-1.3B': 'facebook/nllb-200-1.3B',
                 #   'nllb-distilled': 'facebook/nllb-200-distilled-1.3B',
                   #'nllb-3.3B': 'facebook/nllb-200-3.3B',
