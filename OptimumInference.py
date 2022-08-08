@@ -11,8 +11,8 @@ from transformers import AutoTokenizer
 from optimum.onnxruntime import ORTModelForCausalLM
 import torch
 
-tokenizer = AutoTokenizer.from_pretrained("./onnx3")
-model = ORTModelForCausalLM.from_pretrained("./onnx3")
+tokenizer = AutoTokenizer.from_pretrained("./onnx3/onnx")
+model = ORTModelForCausalLM.from_pretrained("./onnx3/onnx")
 
 inputs = tokenizer("My name is Philipp and I live in Germany.", return_tensors="pt")
 
