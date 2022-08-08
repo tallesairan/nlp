@@ -32,13 +32,12 @@ def translation(source, target, text):
         model_name = 'translation'
 
     start_time = time.time()
-    source = flores_codes[source]
-    target = flores_codes[target]
+    
 
     model = model_dict[model_name + '_model']
     tokenizer = model_dict[model_name + '_tokenizer']
 
-    translator = pipeline('translation', model=model, num_workers=54, tokenizer=tokenizer, src_lang=source, tgt_lang=target)
+    translator = pipeline('translation', model=model, num_workers=54, tokenizer=tokenizer)
     output = translator(text, max_length=512)
 
     end_time = time.time()
