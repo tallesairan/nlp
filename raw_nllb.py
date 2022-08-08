@@ -19,8 +19,8 @@ def load_models():
 
     for call_name, real_name in model_name_dict.items():
         print('\tLoading model: %s' % call_name)
-        tokenizer = AutoTokenizer.from_pretrained(real_name, use_auth_token=True, src_lang="por_Latn")
-        model = AutoModelForSeq2SeqLM.from_pretrained(real_name,use_auth_token=True)
+        tokenizer = AutoTokenizer.from_pretrained(real_name, src_lang="por_Latn")
+        model = AutoModelForSeq2SeqLM.from_pretrained(real_name)
         model_dict[call_name+'_model'] = model
         model_dict[call_name+'_tokenizer'] = tokenizer
 
