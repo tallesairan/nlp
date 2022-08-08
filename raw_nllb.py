@@ -38,13 +38,21 @@ def translation(source, target, text):
     model = model_dict[model_name + '_model']
     tokenizer = model_dict[model_name + '_tokenizer']
 
-    translator = pipeline('translation', model=model, num_workers=54, tokenizer=tokenizer, src_lang="por_Latn", tgt_lang=target)
-    output = translator(text)
+
+    inputsTokenized = tokenizer(text, return_tensors="pt")
+    
+    
+    translator = model.generate( **inputsTokenized, forced_bos_token_id=tokenizer.lang_code_to_id[target], max_length=30 )
+    
+    output = tokenizer.batch_decode(translator, skip_special_tokens=True);
+    
+    # translator = pipeline('translation', model=model, num_workers=54, tokenizer=tokenizer, src_lang="por_Latn", tgt_lang=target)
+    # output = translator(text)
 
     end_time = time.time()
 
     full_output = output
-    output = output[0]['translation_text']
+    output = output[0]
     result = {'time': end_time - start_time,
               'text': text,
               'source': source,
