@@ -42,7 +42,7 @@ def translation(source, target, text):
     inputsTokenized = tokenizer(text, return_tensors="pt")
     
     
-    translator = model.generate( **inputsTokenized, forced_bos_token_id=tokenizer.lang_code_to_id[target], max_length=30 )
+    translator = model.generate( **inputsTokenized, forced_bos_token_id=tokenizer.lang_code_to_id[target], max_length=512 )
     
     output = tokenizer.batch_decode(translator, skip_special_tokens=True);
     
