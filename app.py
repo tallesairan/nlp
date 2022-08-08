@@ -38,7 +38,7 @@ def translation(source, target, text):
     model = model_dict[model_name + '_model']
     tokenizer = model_dict[model_name + '_tokenizer']
 
-    translator = pipeline('translation', model=model, num_workers=54, tokenizer=tokenizer, src_lang=source, tgt_lang=target, device=1)
+    translator = pipeline('translation', model=model, num_workers=54, tokenizer=tokenizer, src_lang=source, tgt_lang=target, device=0)
     output = translator(text, max_length=512)
 
     end_time = time.time()
