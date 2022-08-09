@@ -1,0 +1,22 @@
+sudo apt-get update
+# Install Debian packages
+export DEBIAN_FRONTEND=noninteractive
+sudo apt-get upgrade -y
+sudo -E apt-get install zip git wget curl screen htop tzdata -y
+
+echo "Installing Miniconda3"
+wget  https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh -o ~/miniconda-setup.sh
+bash ~/miniconda-setup.sh -f -p $HOME/miniconda
+eval "$($HOME/miniconda/bin/conda init)"
+
+echo "Get NLP"
+git clone https://github.com/tallesairan/nlp --depth 1 ~/nlp
+~/miniconda/bin/pip install -e ~/nlp
+echo "~/miniconda/bin/conda init" >> ~/.profile
+
+echo "Installing pytorch cuda 11.6"
+~/miniconda/bin/conda install pytorch torchvision torchaudio cudatoolkit=11.6 -c pytorch -c conda-forge 
+
+
+source ~/bash_profile
+cd ~/nlp

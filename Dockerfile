@@ -9,6 +9,7 @@ RUN passwd -d nllb
 RUN usermod -aG sudo nllb
 
 COPY bin/init_setup /home/nllb/
+RUN mkdir /home/nllb/utils
 RUN chown nllb:nllb /home/nllb/init_setup
 RUN chmod 774 /home/nllb/init_setup
 
