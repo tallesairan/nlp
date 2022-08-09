@@ -10,12 +10,8 @@ from fastapi import FastAPI
  
 def load_models():
     # build model and tokenizer
-    model_name_dict = {
-		  #'nllb-distilled-600M': 'facebook/nllb-200-distilled-600M',
-                  #'nllb-1.3B': 'facebook/nllb-200-1.3B',
-                  #'nllb-distilled-1.3B': 'facebook/nllb-200-distilled-1.3B',
-                  'gpt-j': 'mrm8488/bertin-gpt-j-6B-ES-8bit'
-                  #'nllb-3.3B': 'facebook/nllb-200-3.3B',
+    model_name_dict = { 
+                  'gpt-j': 'bertin-project/bertin-gpt-j-6B'
                   }
 
     model_dict = {}
@@ -23,7 +19,6 @@ def load_models():
     for call_name, real_name in model_name_dict.items():
         print('\tLoading model: %s' % call_name)
         
-        # model = GPTJForCausalLM.from_pretrained(real_name, torch_dtype=torch.float16, low_cpu_mem_usage=True).to("cuda")
         model = AutoModelForCausalLM.from_pretrained(real_name)
         tokenizer = AutoTokenizer.from_pretrained(real_name)
         model_dict[call_name+'_model'] = model
