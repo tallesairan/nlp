@@ -8,6 +8,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from fastapi import Body, FastAPI,Request
 from parallelformers import parallelize
 from typing import Any, Dict, AnyStr, List, Union
+import ast
  
 def load_models():
     # build model and tokenizer
@@ -103,10 +104,12 @@ def GenerateText(text,tokens):
               }
     return result
 
-
+ 
 def extractArgumentsFromJson(jsonString):
-    loadedJson =json.loads(jsonString)
-    return loadedJson
+    jsonData = jsonString["data"]
+    print(type(jsonData))
+    return jsonData
+ 
 
 def GenerateTextByPayload(payload):
     
@@ -140,7 +143,7 @@ def GenerateTextByPayload(payload):
     """
     
     payloadArguments = extractArgumentsFromJson(payload)
-    output = generator(payloadArguments)
+    output = generator(**payloadArguments)
 
     end_time = time.time()
 
@@ -154,13 +157,7 @@ def GenerateTextByPayload(payload):
 
 def TestGenerateTextByPayload(payload):
         
-    # print(payload)
     payloadArguments = extractArgumentsFromJson(payload)
-
-
-
-
-    print(payloadArguments)
     return payloadArguments
 
 global model_dict
@@ -189,4 +186,5 @@ async def inference(request: Request):
     """
         max_new_tokens=payload.tokens, no_repeat_ngram_size=2,num_return_sequences=3,num_beams=5    
     """
-    return GenerateTextByPayload(await request.body())
+    jsonBody = await request.json();
+    return TestGenerateTextByPayload(jsonBody)

@@ -5,3 +5,5 @@ openai
 sentencepiece
 accelerate
 parallelformers
+asyncio
+ast
