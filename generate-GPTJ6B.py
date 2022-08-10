@@ -13,8 +13,8 @@ import ast
 def load_models():
     # build model and tokenizer
     model_name_dict = {
-                  'gpt-j': 'distilgpt2'
-                #   'gpt-j': 'EleutherAI/gpt-j-6B'
+
+                  'gpt-j': 'EleutherAI/gpt-j-6B'
                   }
 
     model_dict = {}
