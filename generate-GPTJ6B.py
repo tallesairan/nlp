@@ -7,8 +7,7 @@ import json
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from fastapi import Body, FastAPI
 from parallelformers import parallelize
-
-
+from typing import Any, Dict, AnyStr, List, Union
  
 def load_models():
     # build model and tokenizer
@@ -170,7 +169,9 @@ def TestGenerateTextByPayload(payload):
 
 app = FastAPI()
 
-
+JSONObject = Dict[AnyStr, Any]
+JSONArray = List[Any]
+JSONStructure = Union[JSONArray, JSONObject]
 
 @app.get("/")
 async def root():
@@ -184,8 +185,8 @@ async def generate(tokens: int = 250, text: str = 'Control Max'):
         "text": text,
         "GenerateText": GenerateText(text,tokens)}
 
-@app.get("/inference")
-async def inference(payload: dict = Body(...)):
+@app.post("/inference")
+async def inference(payload: JSONStructure = None):
     """
         max_new_tokens=payload.tokens, no_repeat_ngram_size=2,num_return_sequences=3,num_beams=5    
     """
