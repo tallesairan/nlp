@@ -5,7 +5,7 @@ import torch
 import time
 import json
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
-from fastapi import Body, FastAPI
+from fastapi import Body, FastAPI,Request
 from parallelformers import parallelize
 from typing import Any, Dict, AnyStr, List, Union
  
