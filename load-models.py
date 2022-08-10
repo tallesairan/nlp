@@ -19,6 +19,7 @@ def load_models():
 
     model_dict = {}
 
+
     for call_name, real_name in model_name_dict.items():
         print('\tLoading model: %s' % call_name)
         
