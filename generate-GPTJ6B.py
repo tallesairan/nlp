@@ -103,6 +103,8 @@ def GenerateText(text,tokens):
               'full_output': full_output
               }
     return result
+
+
 def extractArgumentsFromJson(jsonString):
     loadedJson =json.loads(jsonString)
     return dict(loadedJson)
@@ -154,10 +156,17 @@ def GenerateTextByPayload(payload):
               }
     return result
 
- 
- 
-global model_dict
-model_dict = load_models()
+def TestGenerateTextByPayload(payload):
+        
+    print(payload)
+    payloadArguments = extractArgumentsFromJson(payload)
+
+
+
+    return payloadArguments
+
+# global model_dict
+# model_dict = load_models()
 
 app = FastAPI()
 
@@ -180,4 +189,4 @@ async def inference(payload: dict = Body(...)):
     """
         max_new_tokens=payload.tokens, no_repeat_ngram_size=2,num_return_sequences=3,num_beams=5    
     """
-    return GenerateTextByPayload(payload)
+    return TestGenerateTextByPayload(payload)
