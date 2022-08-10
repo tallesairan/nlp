@@ -110,9 +110,6 @@ def extractArgumentsFromJson(jsonString):
 
 def GenerateTextByPayload(payload):
     
- 
-
-
 
     if len(model_dict) == 2:
         model_name = 'gpt-j'
@@ -157,15 +154,17 @@ def GenerateTextByPayload(payload):
 
 def TestGenerateTextByPayload(payload):
         
-    print(payload)
+    # print(payload)
     payloadArguments = extractArgumentsFromJson(payload)
 
 
 
+
+    print(payloadArguments)
     return payloadArguments
 
-# global model_dict
-# model_dict = load_models()
+global model_dict
+model_dict = load_models()
 
 app = FastAPI()
 
@@ -190,4 +189,4 @@ async def inference(request: Request):
     """
         max_new_tokens=payload.tokens, no_repeat_ngram_size=2,num_return_sequences=3,num_beams=5    
     """
-    return TestGenerateTextByPayload(await request.body())
+    return GenerateTextByPayload(await request.body())
