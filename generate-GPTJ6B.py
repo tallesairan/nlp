@@ -144,7 +144,7 @@ def GenerateTextByPayload(payload):
     """
     
     payloadArguments = extractArgumentsFromJson(payload)
-    output = generator(*payloadArguments)
+    output = generator(**payloadArguments)
 
     end_time = time.time()
 
@@ -188,4 +188,4 @@ async def inference(request: Request):
         max_new_tokens=payload.tokens, no_repeat_ngram_size=2,num_return_sequences=3,num_beams=5    
     """
     jsonBody = await request.json();
-    return TestGenerateTextByPayload(jsonBody)
+    return GenerateTextByPayload(jsonBody)
