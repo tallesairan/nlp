@@ -3,10 +3,10 @@ export DEBIAN_FRONTEND=noninteractive
 echo "Installing Miniconda3"
 curl "https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh" --output ~/miniconda-setup.sh
 sh ~/miniconda-setup.sh -f -b -p $HOME/miniconda
-echo "~/miniconda/bin/conda init" >> ~/.bash_profile
-source ~/.bash_profile
+echo "~/miniconda/bin/conda init" >> ~/.bashrc
+source ~/.bashrc
 echo "Get NLP"
-git clone https://github.com/tallesairan/nlp --depth 1 ~/nlp
+git clone https://github.com/tallesairan/nlp  ~/nlp
 ~/miniconda/bin/pip install -r ~/nlp/requirements.txt --quiet
 echo "Installing pytorch cuda 11.6"
 ~/miniconda/bin/conda install -y pytorch torchvision torchaudio cudatoolkit=11.6 -c pytorch -c conda-forge 

@@ -5,6 +5,8 @@ import torch
 import time
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from fastapi import FastAPI
+from parallelformers import parallelize
+
 
  
 def load_models():
@@ -21,7 +23,8 @@ def load_models():
         ## GPTJ WITH CUDA
         #model = AutoModelForCausalLM.from_pretrained(real_name,  device=0, low_cpu_mem_usage=True) 
         # GPTJ CPU ONLY
-        model = AutoModelForCausalLM.from_pretrained(real_name)
+        model = AutoModelForCausalLM.from_pretrained(real_name,low_cpu_mem_usage=True)
+        parallelize(model, num_gpus=2, fp16=True, verbose='detail')
         tokenizer = AutoTokenizer.from_pretrained(real_name)
         model_dict[call_name+'_model'] = model
         model_dict[call_name+'_tokenizer'] = tokenizer
