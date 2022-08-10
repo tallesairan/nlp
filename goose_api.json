@@ -1,12 +1,11 @@
-{ 
-"editorText": "",
-"frequencyPenalty": 0,
-"logprobsState": "off",
-"maxTokens": 169,
-"model": "gpt-j-6b",
-"presencePenalty": 0,
-"tailFreeSampling": 1,
-"temperature": 1.33,
-"topK": 12,
-"topP": 1,
+{
+    "frequencyPenalty": 0,
+    "logprobsState": "off",
+    "maxTokens": 292,
+    "model": "gpt-j-6b",
+    "presencePenalty": 0,
+    "tailFreeSampling": 0.8200000000000001,
+    "temperature": 1.72,
+    "topK": 83,
+    "topP": 0.8200000000000001
 }
