@@ -13,7 +13,8 @@ import ast
 def load_models():
     # build model and tokenizer
     model_name_dict = {
-                  'gpt-j': 'EleutherAI/gpt-j-6B'
+                  'gpt-j': 'distilgpt2'
+                #   'gpt-j': 'EleutherAI/gpt-j-6B'
                   }
 
     model_dict = {}
@@ -143,7 +144,7 @@ def GenerateTextByPayload(payload):
     """
     
     payloadArguments = extractArgumentsFromJson(payload)
-    output = generator(**payloadArguments)
+    output = generator(*payloadArguments)
 
     end_time = time.time()
 
