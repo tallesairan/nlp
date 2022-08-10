@@ -1,0 +1,12 @@
+{ 
+"editorText": "",
+"frequencyPenalty": 0,
+"logprobsState": "off",
+"maxTokens": 169,
+"model": "gpt-j-6b",
+"presencePenalty": 0,
+"tailFreeSampling": 1,
+"temperature": 1.33,
+"topK": 12,
+"topP": 1,
+}

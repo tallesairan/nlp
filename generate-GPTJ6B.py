@@ -46,7 +46,7 @@ def GenerateText(text,tokens):
         
     generator = pipeline('text-generation',  model=model, tokenizer=tokenizer)
         
-    output = generator(text, do_sample=True, temperature=0.9, max_new_tokens=tokens)
+    output = generator(text,  top_p=1, top_k=12, length_penalty=0, do_sample=True, temperature=1.33, max_new_tokens=tokens)
 
     end_time = time.time()
 

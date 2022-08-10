@@ -11,10 +11,10 @@ def load_models():
     # build model and tokenizer
     model_name_dict = {
                     'gpt-j-6B': 'EleutherAI/gpt-j-6B',
-                    'distilgpt2': 'distilgpt2',
-                    'nllb-distilled': 'facebook/nllb-200-distilled-1.3B',
-                    'opus-mt-mul-en': 'Helsinki-NLP/opus-mt-mul-en',
-                    'bertin-gpt-j-6B':'bertin-project/bertin-gpt-j-6B'
+                    # 'distilgpt2': 'distilgpt2',
+                    # 'nllb-distilled': 'facebook/nllb-200-distilled-1.3B',
+                    # 'opus-mt-mul-en': 'Helsinki-NLP/opus-mt-mul-en',
+                    # 'bertin-gpt-j-6B':'bertin-project/bertin-gpt-j-6B'
                 }
 
     model_dict = {}
