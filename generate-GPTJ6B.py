@@ -106,7 +106,7 @@ def GenerateText(text,tokens):
 
 def extractArgumentsFromJson(jsonString):
     loadedJson =json.loads(jsonString)
-    return dict(loadedJson)
+    return loadedJson
 
 def GenerateTextByPayload(payload):
     
