@@ -186,8 +186,8 @@ async def generate(tokens: int = 250, text: str = 'Control Max'):
         "GenerateText": GenerateText(text,tokens)}
 
 @app.post("/inference")
-async def inference(payload: JSONStructure = None):
+async def inference(request: Request):
     """
         max_new_tokens=payload.tokens, no_repeat_ngram_size=2,num_return_sequences=3,num_beams=5    
     """
-    return TestGenerateTextByPayload(payload)
+    return TestGenerateTextByPayload(await request.body())
