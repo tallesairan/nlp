@@ -14,7 +14,7 @@ def load_models():
     # build model and tokenizer
     model_name_dict = {
 
-                  'bloom': 'bigscience/bloom'
+                  'bloom': 'bigscience/bloom-1b7'
                   }
 
     model_dict = {}
