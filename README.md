@@ -58,5 +58,16 @@ usage examples, I tested them all in fastapi to speed up the inference without h
                     file-name : program
 uvicorn --port 5643  translate-nllb:app
 uvicorn --port 5643  translate-mbart-en-pt:app
+
+curl --location --request POST 'http://127.0.0.1:5643/inference' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "data": {
+        "prompt": "The quick brown fox jumps over the lazy dog.",
+        "num_inference_steps": 50,
+        "scale": "7.5",
+        "samples": 4
+    }
+}'
 ```
 
