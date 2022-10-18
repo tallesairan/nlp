@@ -1,4 +1,5 @@
 https://huggingface.co/spaces/Gustavosta/MagicPrompt-Stable-Diffusion
+https://www.assemblyai.com/blog/how-to-run-stable-diffusion-locally-to-generate-images/
 
 Landscape Vista Home 2050 AI singularity, Hyperrealistic, Octane Render, digital art, Artstation, Studio Ghibli, In the style of Jamie Hewlett Hiroya Oku Riyoko Ikeda, 3d render, artstation trending, 8k, octane render, photorealistic, sharp detail, manga, black and white
 
