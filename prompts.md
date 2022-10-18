@@ -24,3 +24,12 @@ Landscape Peacefull Realization
 Landscape Peacefull landscape with dramatic sky, golden hour, cinematic, Artstation trending, m-Movie, Highly Detailed, golden hour, cinematic lighting, concept art
 
 Landscape Peacefull landscape beautiful dynamic dramatic dark moody lighting,shadows,cinematic atmosphere,Artstation,concept design art,Octane render,8K
+
+
+Heavenly Places, holy place, high fantasy, digital art, illustration, beautiful, 35mm, trending on artstation
+
+Heavenly Places mystical calm calm calm creek aqueducts geysers volcano lava lake fireflies concept art digital painting Greg Rutkowski Mark Arian trending on artstation
+
+Heavenly Places, holy landscape, scarry, cloudy, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, art by artgerm and greg rutkowski and alphonse mucha
+
+Heavenly Places where the river meets the ocean, Bioluminescent, extremely detailed oil painting, unreal 5 render, rhads, Bruce Pennington, Studio Ghibli, tim hildebrandt, digital art, octane render, beautiful composition, trending on artstation, award-winning photograph, masterpiece
