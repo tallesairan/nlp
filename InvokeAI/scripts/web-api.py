@@ -2,21 +2,9 @@
 # Copyright (c) 2022 Lincoln D. Stein (https://github.com/lstein)
 
 import os
-import re
-import sys
-import shlex
-import copy
-import warnings
 import time
-import traceback
-import torch
-import time
-import json
-from diffusers import StableDiffusionPipeline
 from fastapi import Body, FastAPI,Request
-from parallelformers import parallelize
 from typing import Any, Dict, AnyStr, List, Union
-import ast
 # sys.path.append('.')    # corrects a weird problem on Macs?
 from ldm.generate import Generate
  
