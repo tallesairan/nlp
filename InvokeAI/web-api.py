@@ -58,6 +58,7 @@ def load_generate_instance():
 
 global g
 g = load_generate_instance()
+g.load_model();
 
 app = FastAPI()
 
