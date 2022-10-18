@@ -10,9 +10,6 @@ import warnings
 import time
 import traceback
 sys.path.append('.')    # corrects a weird problem on Macs
-f
-
-
 from ldm.generate import Generate
 g       = Generate()
 outputs = g.txt2img("a unicorn in manhattan")
