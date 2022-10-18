@@ -17,7 +17,7 @@ from fastapi import Body, FastAPI,Request
 from parallelformers import parallelize
 from typing import Any, Dict, AnyStr, List, Union
 import ast
-sys.path.append('.')    # corrects a weird problem on Macs
+# sys.path.append('.')    # corrects a weird problem on Macs?
 from ldm.generate import Generate
  
  
