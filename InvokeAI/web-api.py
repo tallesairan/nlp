@@ -20,7 +20,6 @@ def GenerateImageByJsonPayload(payload):
     
     start_time = time.time()
 
-    g = Generate()
  
  
     
@@ -53,6 +52,12 @@ def TestGenerateImageByJsonPayload(payload):
     return payloadArguments
  
 
+def load_generate_instance():
+    g = Generate()
+    return g
+
+global g
+g = load_generate_instance()
 
 app = FastAPI()
 
