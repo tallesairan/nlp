@@ -4,7 +4,7 @@ import os
 import torch
 import time
 import json
-from transformers import AutoTokenizer, BloomForCausalLM, pipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from fastapi import Body, FastAPI,Request
 from parallelformers import parallelize
 from typing import Any, Dict, AnyStr, List, Union
@@ -15,8 +15,8 @@ def load_models():
     model_name_dict = {
 
 
-                  'bloom': 'bigscience/bloom-1b7'
-                  #'bloom': 'bigscience/bloom-7b1'
+                  'xglm': 'facebook/xglm-7.5B'
+                  #'xglm': 'bigscience/xglm-7b1'
                   }
 
     model_dict = {}
@@ -25,11 +25,11 @@ def load_models():
         print('\tLoading model: %s' % call_name)
         
         ## GPTJ WITH CUDA
-        #model = BloomForCausalLM.from_pretrained(real_name, low_cpu_mem_usage=True) 
+        #model = xglmForCausalLM.from_pretrained(real_name, low_cpu_mem_usage=True) 
         #parallelize(model, num_gpus=1, fp16=True, verbose='detail')
         
         # GPTJ CPU ONLY
-        model = BloomForCausalLM.from_pretrained(real_name)
+        model = AutoModelForCausalLM.from_pretrained(real_name)
         tokenizer = AutoTokenizer.from_pretrained(real_name)
         model_dict[call_name+'_model'] = model
         model_dict[call_name+'_tokenizer'] = tokenizer
@@ -69,7 +69,7 @@ def GenerateText(text,tokens):
     
  
     if len(model_dict) == 2:
-        model_name = 'bloom'
+        model_name = 'xglm'
 
     start_time = time.time()
    
@@ -86,7 +86,7 @@ def GenerateText(text,tokens):
         "frequencyPenalty": 0,
         "logprobsState": "off",
         "maxTokens": 292,
-        "model": "bloom-6b",
+        "model": "xglm-6b",
         "presencePenalty": 0,
         "tailFreeSampling": 0.8200000000000001,
         "temperature": 1.72,
@@ -118,7 +118,7 @@ def GenerateTextByPayload(payload):
     
 
     if len(model_dict) == 2:
-        model_name = 'bloom'
+        model_name = 'xglm'
 
     start_time = time.time()
    
@@ -135,7 +135,7 @@ def GenerateTextByPayload(payload):
         "frequencyPenalty": 0,
         "logprobsState": "off",
         "maxTokens": 292,
-        "model": "bloom-6b",
+        "model": "xglm-6b",
         "presencePenalty": 0,
         "tailFreeSampling": 0.8200000000000001,
         "temperature": 1.72,

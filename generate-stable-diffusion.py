@@ -31,8 +31,8 @@ def load_models():
         #parallelize(model, num_gpus=2, fp16=True, verbose='detail')
         
         # GPTJ CPU ONLY
-        # model = StableDiffusionPipeline.from_pretrained(real_name, revision="fp16", torch_dtype=torch.float16, low_cpu_mem_usage=True, use_auth_token=AUTH_TOKEN)
-        model = StableDiffusionPipeline.from_pretrained(real_name, revision="fp16", torch_dtype=torch.float16, use_auth_token=AUTH_TOKEN)
+        model = StableDiffusionPipeline.from_pretrained(real_name, revision="fp16", torch_dtype=torch.float16, low_cpu_mem_usage=True, use_auth_token=AUTH_TOKEN)
+        #model = StableDiffusionPipeline.from_pretrained(real_name, revision="fp16", torch_dtype=torch.float16, use_auth_token=AUTH_TOKEN)
         model_dict[call_name+'_model'] = model
 
     return model_dict
