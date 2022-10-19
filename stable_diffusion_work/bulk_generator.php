@@ -87,8 +87,8 @@ function stableDiffusionGenerateRequest($prompt)
     $jsArray = [
         "data" => [
             "prompt" => $prompt, 
-            "iterations" => 6, 
-            "steps" => 100, 
+            "iterations" => 7, 
+            "steps" => 98, 
             "cfg_scale" => 7.5, 
             "threshold" => 0, 
             "perlin" => 0, 
@@ -97,8 +97,7 @@ function stableDiffusionGenerateRequest($prompt)
             "sampler_name" => "k_lms", 
             "seamless" => false, 
             "progress_images" => false, 
-            "variation_amount" => 0, 
-            "upscale" => "2 2.0" 
+            "variation_amount" => 0
         ]
     ]; 
     
