@@ -122,7 +122,7 @@ function stableDiffusionGenerateRequest($prompt)
     
     curl_close($curl);
     if($response){
-        $response = json_encode($response);
+        $response = json_decode($response);
     }
 
     return $response;
@@ -139,5 +139,4 @@ foreach($promps as $prompt){
 
     $generateRequest = stableDiffusionGenerateRequest($pRequest);
     print_r($generateRequest);
-    die();
 }
