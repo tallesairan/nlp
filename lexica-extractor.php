@@ -46,7 +46,28 @@ $ideas = [
     "https://image.lexica.art/md/e653bc87-b9fb-4325-a670-e421e756f2d3",
   
     "https://image.lexica.art/md/79578f19-5c41-4ff0-8b29-ad47be5f2d84",
-    ""
+    "Landscape Brazil",
+    "Heavenly Places ",
+    "A beautiful and highly detailed photo of the most epic lush mountains ever",
+    "Single red maple tree growing in grand canyon",
+    "a beautiful awesome artistic tree with flowers like leaves and many birds, all in the amazing outdoors view, mountain in the background",
+    "a beautiful landscape, 8K, RTX REnder",
+
+    "amazing landscape photo of mountains with lake in sunset by marc adamus, beautiful dramatic lighting",
+    "Buddha Garden, RTX Render",
+    "Dream Garden, night, Sci-fi",
+    "Landscape Peacefull dynamic dramatic moody lighting",
+    "viking stone dark age castle sitting by the seaside with rolling hills and a small village and a moat by eugene von guerard",
+    "Landscape Mountains, Rivers, dramatic lighting, Rendered RTX",
+    "A rocky mountain with a few patches of snow.",
+    "A lush green forest with a few clearings and a river running through it.",
+    "A tranquil landscape with a calm lake surrounded by trees, cinematic, 8k, RTX Render",
+    "A world with dense forests, verdant fields, and abundant wildlife.",
+    "A tranquil lake surrounded by mountains",
+    "A starry night sky over a quiet lake",
+    "A brightly lit skyline of a city at night, RTX Render, Modern, Cinematic",
+    "",
+    "",
 ];
 
 
