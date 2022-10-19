@@ -7,9 +7,12 @@ from fastapi import Body, FastAPI,Request
 from typing import Any, Dict, AnyStr, List, Union
 # sys.path.append('.')    # corrects a weird problem on Macs?
 from ldm.generate import Generate
- 
- 
- 
+from ldm.invoke.restoration import Restoration
+
+
+    
+    
+    
 def extractArgumentsFromJson(jsonString):
     jsonData = jsonString["data"]
     print(type(jsonData))
@@ -53,7 +56,14 @@ def TestGenerateImageByJsonPayload(payload):
  
 
 def load_generate_instance():
-    g = Generate()
+    GFPGAN_DIR        = './src/gfpgan'
+    GFPGAN_MODEL_PATH = 'experiments/pretrained_models/GFPGANv1.4.pth'
+    ESRGAN_BG_TILE    =  400 
+    gfpgan, codeformer, esrgan = None, None, None
+    restoration = Restoration()
+    esrgan = restoration.load_esrgan(ESRGAN_BG_TILE)
+    gfpgan, codeformer = restoration.load_face_restore_models(GFPGAN_DIR, GFPGAN_MODEL_PATH)
+    g = Generate(gfpgan=gfpgan, codeformer=codeformer, esrgan=esrgan)
     return g
 
 global g
