@@ -66,12 +66,12 @@ $ideas = [
     "A tranquil lake surrounded by mountains",
     "A starry night sky over a quiet lake",
     "A brightly lit skyline of a city at night, RTX Render, Modern, Cinematic",
-    "",
-    "",
+    "Privacy Fence Landscaping",
+    "skyscraper landscape vista",
 ];
 
 
-function lexicaApiRequest($query)
+function stableDiffusionGenerateRequest($prompt)
 {
     $header = array(
         "content-type: application/json"
@@ -79,56 +79,65 @@ function lexicaApiRequest($query)
 
  
     $fimages = [];
-    $searchRequest = 'https://lexica.art/api/v1/search?q='.urlencode($query);
+
+
+
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $searchRequest);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $content = curl_exec($curl);
-    curl_close($curl);
-    if($content){
-        
-        $content = json_decode($content, true);
-     
-        if($content){
-            if(isset($content['images'])){
-                foreach($content['images'] as $cImage){
-                    $fimages[]=[
-                        'prompt'=>$cImage['prompt'],
-                        'seed'=>$cImage['seed'],
-                        'width'=>$cImage['width'],
-                        'height'=>$cImage['height'],
-                    ];
 
-                }
-
-                return $fimages;
-            }
-        }
-
-    }
+    $jsArray = [
+        "data" => [
+            "prompt" => $prompt, 
+            "iterations" => 6, 
+            "steps" => 100, 
+            "cfg_scale" => 7.5, 
+            "threshold" => 0, 
+            "perlin" => 0, 
+            "height" => 512, 
+            "width" => 512, 
+            "sampler_name" => "k_lms", 
+            "seamless" => false, 
+            "progress_images" => false, 
+            "variation_amount" => 0, 
+            "upscale" => "2 2.0" 
+        ]
+    ]; 
     
-    return false;
-}
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'http://127.0.0.1:5643/inference',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS =>json_encode($jsArray),
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json'
+      ),
+    ));
+    
+    $response = curl_exec($curl);
 
-function writeText($lines){
-   return file_put_contents('prompt-extraxt.txt', $lines.PHP_EOL , FILE_APPEND | LOCK_EX);
-}
+    
+    curl_close($curl);
+    if($response){
+        $response = json_encode($response);
+    }
 
+    return $response;
 
  
-foreach($ideas as $idea){
+}
 
 
-    $apiRequest = lexicaApiRequest($idea);
+$promps = explode("\n", file_get_contents('prompt-extract.txt'));
 
-    if($apiRequest){
-        $lines = '';
-        foreach($apiRequest as $imagepromp){
-            $lines .= $imagepromp['prompt'].PHP_EOL;
 
-        }
-        writeText($lines);
-    }
+foreach($promps as $prompt){
+    $pRequest = trim($prompt);
 
+    $generateRequest = stableDiffusionGenerateRequest($pRequest);
+    print_r($generateRequest);
+    die();
 }
