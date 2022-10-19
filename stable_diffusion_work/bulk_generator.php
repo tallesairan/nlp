@@ -135,7 +135,12 @@ $promps = explode("\n", file_get_contents('prompt-extract.txt'));
 
 foreach($promps as $prompt){
     $pRequest = trim($prompt);
-
+    echo "Working On " . $pRequest . "\n";
     $generateRequest = stableDiffusionGenerateRequest($pRequest);
+    if($generateRequest){
+        echo "Inference Time sec: " . $generateRequest['inference_time'] . "\n";
+        echo "Output Image Count: " . count($generateRequest['full_output']) . "\n";
+        echo "First Image: " . count($generateRequest['full_output'][0][0] ?? 'nd') . "\n";
+    }
     print_r($generateRequest);
 }
