@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 export DEBIAN_FRONTEND=noninteractive
+echo "Installing Ngrok"
+curl "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz" --output ~/ngrok.tgz
+tar xvzf ~/ngrok.tgz
+tar xvzf ~/ngrok.tgz -C /usr/local/bin
 echo "Installing Miniconda3"
 curl "https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh" --output ~/miniconda-setup.sh
 sh ~/miniconda-setup.sh -f -b -p $HOME/miniconda
