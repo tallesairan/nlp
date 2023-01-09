@@ -15,7 +15,7 @@ def load_models():
     model_name_dict = {
 
 
-                  'bloom': 'bigscience/bloom-1b7'
+                  'bloom': 'jorgeortizfuentes/bloom-1b1-spanish'
                   #'bloom': 'bigscience/bloom-7b1'
                   }
 
@@ -24,11 +24,11 @@ def load_models():
     for call_name, real_name in model_name_dict.items():
         print('\tLoading model: %s' % call_name)
         
-        ## GPTJ WITH CUDA
+        ## Bloom WITH CUDA
         #model = BloomForCausalLM.from_pretrained(real_name, low_cpu_mem_usage=True) 
         #parallelize(model, num_gpus=1, fp16=True, verbose='detail')
         
-        # GPTJ CPU ONLY
+        # Bloom CPU ONLY
         model = BloomForCausalLM.from_pretrained(real_name)
         tokenizer = AutoTokenizer.from_pretrained(real_name)
         model_dict[call_name+'_model'] = model
