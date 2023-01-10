@@ -11,9 +11,9 @@ def load_models():
     # build model and tokenizer
     model_name_dict = {
                     'bloom-mt': 'bigscience/bloomz-7b1-mt',
-            	    'bloom': 'bigscience/bloom',
-                    'gpt-j-6B': 'EleutherAI/gpt-j-6B',
-                    'bloom-es': 'jorgeortizfuentes/bloom-1b1-spanish'
+            	    #'bloom': 'bigscience/bloom',
+                    #'gpt-j-6B': 'EleutherAI/gpt-j-6B',
+                    #'bloom-es': 'jorgeortizfuentes/bloom-1b1-spanish'
                     # 'distilgpt2': 'distilgpt2',
                     # 'nllb-distilled': 'facebook/nllb-200-distilled-1.3B',
                     # 'opus-mt-mul-en': 'Helsinki-NLP/opus-mt-mul-en',
