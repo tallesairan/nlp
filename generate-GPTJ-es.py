@@ -26,7 +26,7 @@ def load_models():
         
         ## GPTJ WITH CUDA
         model = AutoModelForCausalLM.from_pretrained(real_name).cuda()
-        parallelize(model, num_gpus=2, fp16=True, verbose='detail')
+        parallelize(model, num_gpus=2, fp16=True)
         
         # GPTJ CPU ONLY
         #model = AutoModelForCausalLM.from_pretrained(real_name)
