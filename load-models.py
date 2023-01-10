@@ -10,7 +10,7 @@ from fastapi import FastAPI
 def load_models():
     # build model and tokenizer
     model_name_dict = {
-                    'bloom-mt': 'bigscience/bloomz-7b1-mt',
+                  'gpt-j': 'bertin-project/bertin-gpt-j-6B'
             	    #'bloom': 'bigscience/bloom',
                     #'gpt-j-6B': 'EleutherAI/gpt-j-6B',
                     #'bloom-es': 'jorgeortizfuentes/bloom-1b1-spanish'
