@@ -4,12 +4,17 @@ import os
 import torch
 import time
 import json
-from transformers import AutoTokenizer, AutoModelForCausalLM, GPTJForCausalLM, pipeline
+from optimum.onnxruntime import ORTModelForCausalLM
+
+from optimum.onnxruntime.configuration import AutoQuantizationConfig
+from optimum.onnxruntime import ORTQuantizer
+from transformers import AutoTokenizer, GPTJForCausalLM, pipeline
 from fastapi import Body, FastAPI,Request
 from parallelformers import parallelize
 from typing import Any, Dict, AnyStr, List, Union
 import ast
-os.environ["CUDA_VISIBLE_DEVICES"]="0,1" 
+
+os.environ["CUDA_VISIBLE_DEVICES"]="0" 
 def load_models():
     # build model and tokenizer
     model_name_dict = {
@@ -23,14 +28,16 @@ def load_models():
 
     for call_name, real_name in model_name_dict.items():
         print('\tLoading model: %s' % call_name)
-        
-        ## GPTJ WITH CUDA
-        model = AutoModelForCausalLM.from_pretrained(real_name)
-        parallelize(model, num_gpus=2, fp16=True)
-        
-        # GPTJ CPU ONLY
-        #model = AutoModelForCausalLM.from_pretrained(real_name)
         tokenizer = AutoTokenizer.from_pretrained(real_name)
+
+        model = ORTModelForCausalLM.from_pretrained(
+            real_name,
+            from_transformers=True,
+            provider="CUDAExecutionProvider",
+        )
+        # GPTJ CPU ONLY
+        #model =ORTModelForCausalLM.from_pretrained(real_name)
+        #tokenizer = AutoTokenizer.from_pretrained(real_name)#
         model_dict[call_name+'_model'] = model
         model_dict[call_name+'_tokenizer'] = tokenizer
 
@@ -193,4 +200,3 @@ async def inference(request: Request):
     """
     jsonBody = await request.json();
     return GenerateTextByPayload(jsonBody)
- 

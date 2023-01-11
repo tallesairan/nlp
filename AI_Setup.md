@@ -1,0 +1,2 @@
+https://produto.mercadolivre.com.br/MLB-2079103706-placa-mae-asus-prime-x299-a-ii-ddr4-chipset-intel-x299-_JM
+https://produto.mercadolivre.com.br/MLB-2714270968-processador-intel-core-i9-10940x-_JM#position=2&search_layout=grid&type=item&tracking_id=3d1ec85f-5228-4fc8-9c30-ae2c79a3979d
