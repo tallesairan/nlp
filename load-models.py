@@ -5,8 +5,9 @@ import torch
 import time
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from fastapi import FastAPI
+import transformers.onnx as onnx
 
- 
+import subprocess
 def load_models():
     # build model and tokenizer
     model_name_dict = {
@@ -34,6 +35,15 @@ def load_models():
         model_dict[call_name+'_model'] = model
         model_dict[call_name+'_tokenizer'] = tokenizer
         print('\tLoaded model: %s' % call_name)
+        print('\tSaving model: %s' % call_name)
+        model_dict[call_name+'_model'].save_pretrained('models/'+call_name)
+        print('\tSaved model, saving tokenizer: %s' % call_name)
+        model_dict[call_name+'_tokenizer'].save_pretrained('models/'+call_name)
+
+        p = subprocess.Popen("python -m transformers.onnx --model="+'models/'+call_name+" --feature=causal-lm onnx/", stdout=subprocess.PIPE, shell=True)
+
+        print(p.communicate())
+
     return model_dict
 
  
