@@ -47,7 +47,7 @@ def load_models():
 
     return model_dict
 
- 
+#python -m transformers.onnx --model="models/gptj" --feature=causal-lm onnx/
 
 global model_dict
 model_dict = load_models()
