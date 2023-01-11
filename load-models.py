@@ -25,7 +25,7 @@ def load_models():
 
 
     for call_name, real_name in model_name_dict.items():
-        print('\tLoading model: %s' % call_name)
+        print('\tDownloading model from HF: %s' % call_name)
         
         ## GPTJ WITH CUDA
         #model = AutoModelForCausalLM.from_pretrained(real_name,  device=0, low_cpu_mem_usage=True) 
@@ -40,6 +40,7 @@ def load_models():
         print('\tSaved model, saving tokenizer: %s' % call_name)
         model_dict[call_name+'_tokenizer'].save_pretrained('models/'+call_name)
 
+        print('\tSaved tokenizer, saving onnx: %s' % call_name)
         p = subprocess.Popen("python -m transformers.onnx --model="+'models/'+call_name+" --feature=causal-lm onnx/", stdout=subprocess.PIPE, shell=True)
 
         print(p.communicate())

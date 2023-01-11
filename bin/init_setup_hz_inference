@@ -6,13 +6,14 @@ sudo chown admin:admin /home/admin/ai-inference
 
 echo "Installing Miniconda3"
 curl "https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh" --output ~/ai-inference/miniconda-setup.sh
-sh ~/ai-inference/miniconda-setup.sh -f -b -p $HOME/ai-inference/miniconda
+sudo sh /home/admin/ai-inference/miniconda-setup.sh -f -b -p /home/admin/ai-inference/miniconda
+sudo chown -R admin:admin /home/admin/ai-inference
 export PATH="$HOME/ai-inference/miniconda/bin:$PATH"
 echo "~/ai-inference/miniconda/bin/conda init" >> ~/.bashrc
 source ~/.bashrc
 echo "Get NLP"
 git clone https://github.com/tallesairan/nlp ~/ai-inference/nlp
-~/miniconda/bin/pip install -r ~/ai-inference/nlp/requirements.txt --quiet
+~/ai-inference/miniconda/bin/pip install -r ~/ai-inference/nlp/requirements.txt --quiet
 echo "Installing pytorch cuda 11.6"
 ~/ai-inference/miniconda/bin/conda install -y pytorch torchvision torchaudio cpuonly -c pytorch
 cd ~/ai-inference/nlp
