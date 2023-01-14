@@ -5,8 +5,8 @@ import torch
 import time
 import json
 from optimum.onnxruntime import ORTModelForCausalLM
-
-from transformers import AutoTokenizer, AutoModelForCausalLM, GPTJForCausalLM, pipeline
+from optimum.pipelines import pipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, GPTJForCausalLM
 from fastapi import Body, FastAPI,Request
 from parallelformers import parallelize
 from typing import Any, Dict, AnyStr, List, Union
@@ -131,7 +131,7 @@ def GenerateTextByPayload(payload):
     model = model_dict[model_name + '_model']
     tokenizer = model_dict[model_name + '_tokenizer']
         
-    generator = pipeline('text-generation',  model=model, tokenizer=tokenizer)
+    generator = pipeline('text-generation',  model=model, tokenizer=tokenizer,  accelerator="ort")
     # First Test -> Quechua   
     #output = generator(text,  top_p=1, top_k=12, length_penalty=0, do_sample=True, temperature=1.33, max_new_tokens=tokens)
  

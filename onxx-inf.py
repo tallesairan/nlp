@@ -11,11 +11,17 @@ print("Loading model from HuggingFace")
 ort_model = ORTModelForCausalLM.from_pretrained(model_checkpoint, from_transformers=True)
 tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
 # Save the onnx model and tokenizer
-print("Saving model to disk")
-ort_model.save_pretrained(save_directory_alt)
-tokenizer.save_pretrained(save_directory_alt)
+
+
+
+
+#print("Saving model to disk")
+#ort_model.save_pretrained(save_directory_alt)
+#tokenizer.save_pretrained(save_directory_alt)
  
 """
+
+ 
 # Define the quantization methodology
 print("Quantizing model")
 qconfig = AutoQuantizationConfig.arm64(is_static=False, per_channel=False)
